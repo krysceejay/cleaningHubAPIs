@@ -5,10 +5,22 @@ defmodule CleaningHubWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug CleaningHubWeb.GuardianPipeline
+  end
+
   scope "/api", CleaningHubWeb do
     pipe_through :api
 
     resources "/users", UserController, except: [:new, :edit]
+    post "/session/new", SessionController, :new
+  end
+
+  scope "/api", CleaningHubWeb do
+    pipe_through [:api, :auth]
+
+    post "/session/refresh", SessionController, :refresh
+    post "/session/delete", SessionController, :delete
   end
 
   # Enables LiveDashboard only for development

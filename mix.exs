@@ -46,7 +46,8 @@ defmodule CleaningHub.MixProject do
       {:plug_cowboy, "~> 2.5"},
 
       ## ADDED DEPS ##
-      {:bcrypt_elixir, "~> 3.0"}
+      {:bcrypt_elixir, "~> 3.0"},
+      {:guardian, "~> 2.2"}
     ]
   end
 
