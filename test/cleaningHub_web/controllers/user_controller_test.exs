@@ -6,7 +6,7 @@ defmodule CleaningHubWeb.UserControllerTest do
   alias CleaningHub.Account.User
 
   @create_attrs %{
-    email: "some email",
+    email: "someemail@gmail.com",
     first_name: "some first_name",
     last_name: "some last_name",
     password: "some password",
@@ -41,10 +41,9 @@ defmodule CleaningHubWeb.UserControllerTest do
 
       assert %{
                "id" => ^id,
-               "email" => "some email",
+               "email" => "someemail@gmail.com",
                "first_name" => "some first_name",
                "last_name" => "some last_name",
-               "password" => "some password",
                "phone_number" => "some phone_number"
              } = json_response(conn, 200)["data"]
     end
@@ -69,7 +68,6 @@ defmodule CleaningHubWeb.UserControllerTest do
                "email" => "some updated email",
                "first_name" => "some updated first_name",
                "last_name" => "some updated last_name",
-               "password" => "some updated password",
                "phone_number" => "some updated phone_number"
              } = json_response(conn, 200)["data"]
     end

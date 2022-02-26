@@ -4,10 +4,10 @@ defmodule CleaningHub.AccountFixtures do
   entities via the `CleaningHub.Account` context.
   """
 
-  @doc """
-  Generate a unique user email.
-  """
-  def unique_user_email, do: "some email#{System.unique_integer([:positive])}"
+  # @doc """
+  # Generate a unique user email.
+  # """
+  # def unique_user_email, do: "someemail#{System.unique_integer([:positive])}@gmail.com"
 
   @doc """
   Generate a user.
@@ -16,7 +16,7 @@ defmodule CleaningHub.AccountFixtures do
     {:ok, user} =
       attrs
       |> Enum.into(%{
-        email: unique_user_email(),
+        email: "someemail@gmail.com",
         first_name: "some first_name",
         last_name: "some last_name",
         password: "some password",

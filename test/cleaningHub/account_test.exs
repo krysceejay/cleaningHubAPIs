@@ -21,13 +21,12 @@ defmodule CleaningHub.AccountTest do
     end
 
     test "create_user/1 with valid data creates a user" do
-      valid_attrs = %{email: "some email", first_name: "some first_name", last_name: "some last_name", password: "some password", phone_number: "some phone_number"}
+      valid_attrs = %{email: "someemail@gmail.com", first_name: "some first_name", last_name: "some last_name", password: "some password", phone_number: "some phone_number"}
 
       assert {:ok, %User{} = user} = Account.create_user(valid_attrs)
-      assert user.email == "some email"
+      assert user.email == "someemail@gmail.com"
       assert user.first_name == "some first_name"
       assert user.last_name == "some last_name"
-      assert user.password == "some password"
       assert user.phone_number == "some phone_number"
     end
 
@@ -43,7 +42,6 @@ defmodule CleaningHub.AccountTest do
       assert user.email == "some updated email"
       assert user.first_name == "some updated first_name"
       assert user.last_name == "some updated last_name"
-      assert user.password == "some updated password"
       assert user.phone_number == "some updated phone_number"
     end
 

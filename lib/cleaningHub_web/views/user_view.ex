@@ -20,8 +20,7 @@ defmodule CleaningHubWeb.UserView do
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
-      phone_number: user.phone_number,
-      password: user.password
+      phone_number: user.phone_number
     }
   end
 end
