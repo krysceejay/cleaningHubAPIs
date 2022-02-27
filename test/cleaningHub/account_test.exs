@@ -61,5 +61,25 @@ defmodule CleaningHub.AccountTest do
       user = user_fixture()
       assert %Ecto.Changeset{} = Account.change_user(user)
     end
+
+    test "get_by_email/1 returns the user with given email" do
+      user = user_fixture()
+      assert Account.get_by_email(user.email) == {:ok, user}
+    end
+
+    test "get_by_email/1 with invalid email returns error" do
+      assert Account.get_by_email("wrongemail@gmail.com") == {:error, :not_found}
+    end
+
+    test "authenticate/2 authenticates user with email and password" do
+      user = user_fixture()
+      assert {:ok, %User{} = auth_user} = Account.authenticate("someemail@gmail.com", "some password")
+      assert auth_user.id == user.id
+      assert auth_user.email == user.email
+    end
+
+    test "authenticate/2 with invalid email and password returns error" do
+      assert Account.authenticate("wrongemail@gmail.com", "wrong password") == {:error, :unauthorized}
+    end
   end
 end

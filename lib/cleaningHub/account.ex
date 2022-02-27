@@ -105,7 +105,7 @@ defmodule CleaningHub.Account do
   def get_by_email(email) do
     query = from u in User, where: u.email == ^email
     case Repo.one(query) do
-      nil -> {:error, :unauthorized}
+      nil -> {:error, :not_found}
       user -> {:ok, user}
     end
   end
@@ -117,7 +117,7 @@ defmodule CleaningHub.Account do
         true -> {:ok, user}
       end
     else
-      {:error, :unauthorized} -> {:error, :unauthorized}
+      {:error, _reason} -> {:error, :unauthorized}
     end
   end
 
