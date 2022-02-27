@@ -6,7 +6,7 @@ defmodule CleaningHub.Account do
   import Ecto.Query, warn: false
   alias CleaningHub.Repo
 
-  alias CleaningHub.Account.User
+  alias CleaningHub.Account.{User, Encryption}
 
   @doc """
   Returns the list of users.
@@ -101,4 +101,24 @@ defmodule CleaningHub.Account do
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
   end
+
+  def get_by_email(email) do
+    query = from u in User, where: u.email == ^email
+    case Repo.one(query) do
+      nil -> {:error, :not_found}
+      user -> {:ok, user}
+    end
+  end
+
+  def authenticate(email, password) do
+    with {:ok, user} <- email |> String.downcase |> get_by_email do
+      case Encryption.validate_password(password, user.password) do
+        false -> {:error, :unauthorized}
+        true -> {:ok, user}
+      end
+    else
+      {:error, _reason} -> {:error, :unauthorized}
+    end
+  end
+
 end
